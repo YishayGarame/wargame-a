@@ -1,3 +1,4 @@
+
 /**
  * Header file for the board of the war game.
  * 
@@ -53,6 +54,11 @@ namespace WarGame
 
         // returns true iff the board contains one or more soldiers of the given player.
         bool has_soldiers(uint player_number) const;
+
+        ~Board()
+        {
+            board.clear();
+        }
     };
 
 } // namespace WarGame
