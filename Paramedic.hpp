@@ -7,8 +7,8 @@ using namespace std;
 class Paramedic : public Soldier
 {
 public:
-    static const int max_health = 100;
+    static const uint max_health = 100;
     Paramedic();
-    Paramedic(int player_number);
+    Paramedic(uint player_number);
     void action(std::vector<std::vector<Soldier *>> &board);
 };

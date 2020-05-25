@@ -4,7 +4,7 @@
 using namespace std;
 #include "FootCommander.hpp"
 
-FootCommander::FootCommander(int i)
+FootCommander::FootCommander(uint i)
 {
     health = 150;
     damage = 20;

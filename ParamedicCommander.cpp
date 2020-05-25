@@ -4,7 +4,7 @@
 using namespace std;
 #include "ParamedicCommander.hpp"
 
-ParamedicCommander::ParamedicCommander(int i)
+ParamedicCommander::ParamedicCommander(uint i)
 {
     health = 200;
     damage = 0;
@@ -13,5 +13,4 @@ ParamedicCommander::ParamedicCommander(int i)
 }
 void ParamedicCommander::action(std::vector<std::vector<Soldier *>> &board)
 {
-    return;
 }

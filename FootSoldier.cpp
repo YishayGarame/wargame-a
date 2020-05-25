@@ -4,7 +4,7 @@
 using namespace std;
 #include "FootSoldier.hpp"
 
-FootSoldier::FootSoldier(int i)
+FootSoldier::FootSoldier(uint i)
 {
     health = 100;
     damage = 10;
@@ -13,5 +13,4 @@ FootSoldier::FootSoldier(int i)
 }
 void FootSoldier::action(std::vector<std::vector<Soldier *>> &board)
 {
-    return;
 }

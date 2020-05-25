@@ -4,7 +4,7 @@
 using namespace std;
 #include "SniperCommander.hpp"
 
-SniperCommander::SniperCommander(int i)
+SniperCommander::SniperCommander(uint i)
 {
     health = 120;
     damage = 100;
@@ -13,5 +13,4 @@ SniperCommander::SniperCommander(int i)
 }
 void SniperCommander::action(std::vector<std::vector<Soldier *>> &board)
 {
-    return;
 }

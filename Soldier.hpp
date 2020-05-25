@@ -9,10 +9,15 @@ class Soldier
 {
 
 public:
-    int health;
-    int damage;
-    int player_number;
+    uint health;
+    uint damage;
+    uint player_number;
     string type;
+    char *hartap;
     Soldier(){};
-    void action(std::vector<std::vector<Soldier *>> &board);
+    virtual void action(std::vector<std::vector<Soldier *>> &board) = 0;
+    virtual ~Soldier()
+    {
+        delete hartap;
+    }
 };
