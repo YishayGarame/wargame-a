@@ -2,9 +2,9 @@
 #include <vector>
 #include <stdexcept>
 using namespace std;
-#include "Soldier.hpp"
+#include "FootSoldier.hpp"
 
-class FootCommander : public Soldier
+class FootCommander : public FootSoldier
 {
 public:
     static const uint max_health = 150;
