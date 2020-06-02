@@ -10,5 +10,6 @@ public:
     static const uint max_health = 150;
     FootCommander();
     FootCommander(uint player_number);
-    void action(std::vector<std::vector<Soldier *>> &board);
+    ~FootCommander(){};
+    void action(std::vector<std::vector<Soldier *>> &board, std::pair<int, int> loaction);
 };

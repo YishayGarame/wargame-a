@@ -1,9 +1,11 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <bits/stdc++.h>
 using namespace std;
 #include "FootCommander.hpp"
 
+FootCommander::FootCommander(){};
 FootCommander::FootCommander(uint i)
 {
     health = 150;
@@ -11,28 +13,17 @@ FootCommander::FootCommander(uint i)
     player_number = i;
     type = "FootCommander";
 }
-void FootCommander::action(std::vector<std::vector<Soldier *>> &board)
+void FootCommander::action(std::vector<std::vector<Soldier *>> &board, std::pair<int, int> loaction)
 {
-    int mindis = 999999999;
+    int mindis = INT_MAX;
     int tempdis;
-    int xLoc;
-    int yLoc;
     int tarX;
     int tarY;
+    std::pair<int, int> locationSoldier;
 
-    //check my loction
-    for (int i = 0; i < board.size(); i++)
-    {
-        for (int j = 0; j < board[0].size(); j++)
-        {
-            //board[i][j] != NULL &&
-            if (board[i][j] != nullptr && board[i][j]->id == this->id)
-            {
-                xLoc = i;
-                yLoc = j;
-            }
-        }
-    }
+    //soldier loctaion
+    int xLoc = loaction.first;
+    int yLoc = loaction.second;
 
     //check the distance
     for (int i = 0; i < board.size(); i++)
@@ -68,7 +59,10 @@ void FootCommander::action(std::vector<std::vector<Soldier *>> &board)
 
             if (board[i][j]->type == "FootSoldier" && board[i][j]->player_number == this->player_number)
             {
-                board[i][j]->action(board);
+                //Soldier *s = board[i][j];
+                locationSoldier.first = i;
+                locationSoldier.second = j;
+                board[i][j]->action(board, locationSoldier);
             }
         }
     }

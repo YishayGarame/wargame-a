@@ -10,5 +10,6 @@ public:
     static const uint max_health = 200;
     ParamedicCommander();
     ParamedicCommander(uint player_number);
-    void action(std::vector<std::vector<Soldier *>> &board);
+    ~ParamedicCommander(){};
+    void action(std::vector<std::vector<Soldier *>> &board, std::pair<int, int> loaction);
 };

@@ -4,6 +4,7 @@
 using namespace std;
 #include "ParamedicCommander.hpp"
 
+ParamedicCommander::ParamedicCommander(){};
 ParamedicCommander::ParamedicCommander(uint i)
 {
     health = 200;
@@ -11,25 +12,14 @@ ParamedicCommander::ParamedicCommander(uint i)
     player_number = i;
     type = "ParamedicCommander";
 }
-void ParamedicCommander::action(std::vector<std::vector<Soldier *>> &board)
+void ParamedicCommander::action(std::vector<std::vector<Soldier *>> &board, std::pair<int, int> loaction)
 {
+    std::pair<int, int> locationSoldier;
 
-    //check my loction
-    int xLoc;
-    int yLoc;
+    //soldier loctaion
+    int xLoc = loaction.first;
+    int yLoc = loaction.second;
 
-    for (int i = 0; i < board.size(); i++)
-    {
-        for (int j = 0; j < board[0].size(); j++)
-        {
-            //board[i][j] != NULL &&
-            if (board[i][j] != nullptr && board[i][j]->id == this->id)
-            {
-                xLoc = i;
-                yLoc = j;
-            }
-        }
-    }
     //paramdicCommander action
     for (int i = 0; i < board.size(); i++)
     {
@@ -62,7 +52,9 @@ void ParamedicCommander::action(std::vector<std::vector<Soldier *>> &board)
             //board[i][j] != NULL &&
             if (board[i][j] != nullptr && board[i][j]->type == "Paramedic" && this->player_number == board[i][j]->player_number)
             {
-                board[i][j]->action(board);
+                locationSoldier.first = i;
+                locationSoldier.second = j;
+                board[i][j]->action(board, locationSoldier);
             }
         }
     }

@@ -4,7 +4,6 @@
 #pragma once
 
 using namespace std;
-static int sid = 1;
 class Soldier
 {
 
@@ -13,8 +12,7 @@ public:
     uint damage;
     uint player_number;
     string type;
-    int id;
     Soldier(){};
-    virtual void action(std::vector<std::vector<Soldier *>> &board) = 0;
+    virtual void action(std::vector<std::vector<Soldier *>> &board, std::pair<int, int> loaction) = 0;
     virtual ~Soldier(){};
 };
