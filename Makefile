@@ -16,6 +16,7 @@ demo: Demo.o DemoGame.o $(STUDENT_OBJECTS)
 
 test: TestCounter.o Test.o $(STUDENT_OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
+	
 main1: main.o FootSoldier.o FootCommander.o
 	$(CXX) $(CXXFLAGS) main.o FootSoldier.o FootCommander.o -o main1
 

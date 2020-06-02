@@ -8,7 +8,7 @@
  * @author Erel Segal-Halevi
  * @since  2020-05
  */
-
+#include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>

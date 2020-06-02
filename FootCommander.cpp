@@ -30,19 +30,23 @@ void FootCommander::action(std::vector<std::vector<Soldier *>> &board, std::pair
     {
         for (int j = 0; j < board[0].size(); j++)
         {
-            if (board[i][j] != nullptr && (board[i][j]->player_number != board[xLoc][yLoc]->player_number))
+            if (board[i][j] != nullptr)
             {
-                tempdis = checkDistance(xLoc, yLoc, i, j);
-                if (tempdis < mindis)
+                if (board[i][j]->player_number != board[xLoc][yLoc]->player_number)
                 {
-                    tarX = i;
-                    tarY = j;
-                    mindis = tempdis;
+                    {
+                        tempdis = checkDistance(xLoc, yLoc, i, j);
+                        if (tempdis < mindis)
+                        {
+                            tarX = i;
+                            tarY = j;
+                            mindis = tempdis;
+                        }
+                    }
                 }
             }
         }
     }
-
     //we have the mindis and the target location
     board[tarX][tarY]->health -= this->damage;
     if (board[tarX][tarY]->health <= 0)
@@ -50,19 +54,20 @@ void FootCommander::action(std::vector<std::vector<Soldier *>> &board, std::pair
         board[tarX][tarY] = nullptr;
         //delete soldier
     }
-
     //activate its own soldiers
     for (int i = 0; i < board.size(); i++)
     {
         for (int j = 0; j < board[i].size(); j++)
         {
-
-            if (board[i][j]->type == "FootSoldier" && board[i][j]->player_number == this->player_number)
+            if (board[i][j] != nullptr)
             {
-                //Soldier *s = board[i][j];
-                locationSoldier.first = i;
-                locationSoldier.second = j;
-                board[i][j]->action(board, locationSoldier);
+                if (board[i][j]->type == "FootSoldier" && board[i][j]->player_number == this->player_number)
+                {
+                    //Soldier *s = board[i][j];
+                    locationSoldier.first = i;
+                    locationSoldier.second = j;
+                    board[i][j]->action(board, locationSoldier);
+                }
             }
         }
     }
