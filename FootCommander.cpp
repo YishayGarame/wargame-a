@@ -13,5 +13,69 @@ FootCommander::FootCommander(uint i)
 }
 void FootCommander::action(std::vector<std::vector<Soldier *>> &board)
 {
-    return;
+    int mindis = 999999999;
+    int tempdis;
+    int xLoc;
+    int yLoc;
+    int tarX;
+    int tarY;
+
+    //check my loction
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[0].size(); j++)
+        {
+            //board[i][j] != NULL &&
+            if (board[i][j] != nullptr && board[i][j]->id == this->id)
+            {
+                xLoc = i;
+                yLoc = j;
+            }
+        }
+    }
+
+    //check the distance
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[0].size(); j++)
+        {
+            if (board[i][j] != nullptr && (board[i][j]->player_number != board[xLoc][yLoc]->player_number))
+            {
+                tempdis = checkDistance(xLoc, yLoc, i, j);
+                if (tempdis < mindis)
+                {
+                    tarX = i;
+                    tarY = j;
+                    mindis = tempdis;
+                }
+            }
+        }
+    }
+
+    //we have the mindis and the target location
+    board[tarX][tarY]->health -= this->damage;
+    if (board[tarX][tarY]->health <= 0)
+    {
+        board[tarX][tarY] = nullptr;
+        //delete soldier
+    }
+
+    //activate its own soldiers
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[i].size(); j++)
+        {
+
+            if (board[i][j]->type == "FootSoldier" && board[i][j]->player_number == this->player_number)
+            {
+                board[i][j]->action(board);
+            }
+        }
+    }
+}
+
+int checkDistance(int xLoc, int yLoc, int i, int j)
+{
+    int ans = abs(xLoc - i) + abs(yLoc - j);
+    return ans;
 }

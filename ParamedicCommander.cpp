@@ -13,4 +13,57 @@ ParamedicCommander::ParamedicCommander(uint i)
 }
 void ParamedicCommander::action(std::vector<std::vector<Soldier *>> &board)
 {
+
+    //check my loction
+    int xLoc;
+    int yLoc;
+
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[0].size(); j++)
+        {
+            //board[i][j] != NULL &&
+            if (board[i][j] != nullptr && board[i][j]->id == this->id)
+            {
+                xLoc = i;
+                yLoc = j;
+            }
+        }
+    }
+    //paramdicCommander action
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[i].size(); j++)
+        {
+            //check if the same team
+            if (board[i][j] != nullptr && board[i][j]->player_number == board[xLoc][yLoc]->player_number)
+            {
+                //check if its around the paramedic location
+                if (((i == xLoc - 1 && j == yLoc) || (i == xLoc + 1) ||
+                     (j == yLoc - 1 && i == xLoc) || (j == yLoc + 1 && i == xLoc)))
+                {
+                    board[i][j]->health = this->max_health;
+                }
+                //if its diagnosed to its loctaion
+                if ((i == xLoc - 1 && j == yLoc - 1) || (i == xLoc + 1 && j == yLoc + 1) ||
+                    ((i == xLoc - 1 && j == yLoc + 1) || (i == xLoc + 1 && j == yLoc - 1)))
+                {
+                    board[i][j]->health = this->max_health;
+                }
+            }
+        }
+    }
+
+    //activets its own paramedic soldiers
+    for (int i = 0; i < board.size(); i++)
+    {
+        for (int j = 0; j < board[0].size(); j++)
+        {
+            //board[i][j] != NULL &&
+            if (board[i][j] != nullptr && board[i][j]->type == "Paramedic" && this->player_number == board[i][j]->player_number)
+            {
+                board[i][j]->action(board);
+            }
+        }
+    }
 }

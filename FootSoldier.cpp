@@ -26,7 +26,7 @@ void FootSoldier::action(std::vector<std::vector<Soldier *>> &board)
         for (int j = 0; j < board[0].size(); j++)
         {
             //board[i][j] != NULL &&
-            if (board[i][j] != nullptr && board[i][j]->id = this->id)
+            if (board[i][j] != nullptr && board[i][j]->id == this->id)
             {
                 xLoc = i;
                 yLoc = j;
@@ -39,7 +39,7 @@ void FootSoldier::action(std::vector<std::vector<Soldier *>> &board)
     {
         for (int j = 0; j < board[0].size(); j++)
         {
-            if (board[i][j] != nullptr && board[i][j]->player_number != board[xLoc][yLoc]->player_number)
+            if (board[i][j] != nullptr && (board[i][j]->player_number != board[xLoc][yLoc]->player_number))
             {
                 tempdis = checkDistance(xLoc, yLoc, i, j);
                 if (tempdis < mindis)
@@ -53,7 +53,7 @@ void FootSoldier::action(std::vector<std::vector<Soldier *>> &board)
     }
 
     //we have the mindis and the target location
-    board[tarX][tarY]->health = -this->damage;
+    board[tarX][tarY]->health -= this->damage;
     if (board[tarX][tarY]->health <= 0)
     {
         //i want to check if board.hassoldiers but do know how
@@ -61,7 +61,7 @@ void FootSoldier::action(std::vector<std::vector<Soldier *>> &board)
     }
 }
 
-int checkDistance(int xLoc, int yLoc, int i, int j)
+int FootSoldier::checkDistance(int xLoc, int yLoc, int i, int j)
 {
     int ans = abs(xLoc - i) + abs(yLoc - j);
     return ans;
